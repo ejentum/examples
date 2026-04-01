@@ -1,0 +1,41 @@
+# Ejentum RA2R Logic API -- Cursor Rules
+
+## When to call
+
+Before any non-trivial task: debugging, code review, architecture decisions,
+complex analysis, multi-step planning. One call per discrete sub-task.
+
+Do NOT call for: renaming variables, formatting, simple lookups, trivial edits.
+
+## How to call
+
+```bash
+curl -s -X POST "https://ejentum-main-ab125c3.zuplo.app/logicv1/" \
+  -H "Authorization: Bearer $EJENTUM_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "<your task description>", "mode": "single"}'
+```
+
+## How to inject
+
+Take the `single_ability` (or `multi_ability`) value from the response and
+inject it into your reasoning BEFORE executing:
+
+```
+[REASONING CONTEXT]
+{the injection string from the API}
+[END REASONING CONTEXT]
+```
+
+The Suppress signals are the most important part. They block your natural
+tendency to take shortcuts. Read them before starting.
+
+## Modes
+
+- `single` -- one focused ability. Best for most tasks.
+- `multi` -- four synergized abilities. Use for cross-domain complexity.
+
+## Graceful degradation
+
+If the API is unreachable, proceed with native reasoning. Wrap calls with
+timeout (5s). The API enhances, it's not a dependency.

@@ -1,0 +1,80 @@
+{
+  "name": "Ejentum Logic API - Reasoning Scaffold",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ejentum-main-ab125c3.zuplo.app/logicv1/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $json.taskDescription, mode: \"single\" }) }}",
+        "options": {
+          "timeout": 5000
+        }
+      },
+      "id": "ejentum-call",
+      "name": "Call Ejentum Logic API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst scaffold = response[0]?.single_ability || '';\n\nreturn [{\n  json: {\n    scaffold,\n    systemMessage: `[REASONING CONTEXT]\\n${scaffold}\\n[END REASONING CONTEXT]\\n\\n${$('Trigger').first().json.systemPrompt || 'You are a helpful assistant.'}`,\n    userMessage: $('Trigger').first().json.taskDescription\n  }\n}];"
+      },
+      "id": "inject-scaffold",
+      "name": "Inject Scaffold",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "trigger",
+      "name": "Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    }
+  ],
+  "connections": {
+    "Trigger": {
+      "main": [
+        [
+          {
+            "node": "Call Ejentum Logic API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Ejentum Logic API": {
+      "main": [
+        [
+          {
+            "node": "Inject Scaffold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
