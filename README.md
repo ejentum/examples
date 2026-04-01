@@ -30,6 +30,7 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 | [typescript/basic.ts](typescript/basic.ts) | Fetch-based minimal example |
 | [curl/single.sh](curl/single.sh) | Ki mode one-liner |
 | [curl/multi.sh](curl/multi.sh) | Haki mode one-liner |
+| [python/graceful_degradation.py](python/graceful_degradation.py) | Production pattern: timeout, retry, fallback |
 
 ### Agent Frameworks
 
@@ -38,6 +39,10 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 | [python/langchain_tool.py](python/langchain_tool.py) | LangChain / LangGraph | `@tool` decorator wrapping Logic API call |
 | [python/openai_agents_tool.py](python/openai_agents_tool.py) | OpenAI Agents SDK | Function tool for the Responses API |
 | [python/claude_agent_sdk.py](python/claude_agent_sdk.py) | Anthropic Claude SDK | `tool_use` definition for Claude agents |
+| [python/crewai_tool.py](python/crewai_tool.py) | CrewAI | `BaseTool` subclass for multi-agent crews |
+| [python/pydantic_ai_tool.py](python/pydantic_ai_tool.py) | Pydantic AI | Type-safe tool with async support |
+| [python/google_adk_tool.py](python/google_adk_tool.py) | Google ADK | `FunctionTool` for Gemini agents |
+| [typescript/vercel_ai_tool.ts](typescript/vercel_ai_tool.ts) | Vercel AI SDK | `tool()` with Zod schema validation |
 
 ### IDEs (via MCP or Skill File)
 
@@ -52,6 +57,8 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 | File | Platform | What it does |
 |------|----------|-------------|
 | [n8n/ejentum_workflow.json](n8n/ejentum_workflow.json) | n8n | Importable workflow with HTTP Request + AI Agent nodes |
+| [make-com/](make-com/) | Make.com | Step-by-step HTTP module setup guide |
+| [zapier/](zapier/) | Zapier | Webhooks by Zapier POST setup guide |
 
 ---
 
