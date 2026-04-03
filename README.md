@@ -81,12 +81,7 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 
 ## Builder's Field Notes
 
-28 screenshots from real work sessions showing how the Ejentum founder uses the Logic API inside Claude Code. Backend infrastructure, benchmark design, security auditing, blog writing, dataset purification, and more.
-
-- **[Full guide (website)](https://ejentum.com/docs/field_notes)**
-- **[Blog post](https://ejentum.com/blog/builders-field-notes)**
-- **[PDF download](https://github.com/ejentum/examples/releases)** (release asset)
-- **[Screenshots](field-notes-images/)** (28 annotated images)
+28 screenshots from real work sessions. Full guide with images at [ejentum/builders_playbook](https://github.com/ejentum/builders_playbook).
 
 ---
 
