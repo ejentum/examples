@@ -1,5 +1,5 @@
 {
-  "name": "Ejentum Logic API - Reasoning Scaffold",
+  "name": "Ejentum Logic API - Cognitive Injection",
   "nodes": [
     {
       "parameters": {
@@ -18,7 +18,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ query: $json.taskDescription, mode: \"single\" }) }}",
+        "jsonBody": "={{ JSON.stringify({ query: $json.taskDescription, mode: \"reasoning\" }) }}",
         "options": {
           "timeout": 5000
         }
@@ -31,10 +31,10 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.first().json;\nconst scaffold = response[0]?.single_ability || '';\n\nreturn [{\n  json: {\n    scaffold,\n    systemMessage: `[REASONING CONTEXT]\\n${scaffold}\\n[END REASONING CONTEXT]\\n\\n${$('Trigger').first().json.systemPrompt || 'You are a helpful assistant.'}`,\n    userMessage: $('Trigger').first().json.taskDescription\n  }\n}];"
+        "jsCode": "const response = $input.first().json;\nconst injection = response[0]?.reasoning || '';\n\nreturn [{\n  json: {\n    injection,\n    systemMessage: `[REASONING CONTEXT]\\n${injection}\\n[END REASONING CONTEXT]\\n\\n${$('Trigger').first().json.systemPrompt || 'You are a helpful assistant.'}`,\n    userMessage: $('Trigger').first().json.taskDescription\n  }\n}];"
       },
-      "id": "inject-scaffold",
-      "name": "Inject Scaffold",
+      "id": "inject-ability",
+      "name": "Inject Ability",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [650, 300]
@@ -66,7 +66,7 @@
       "main": [
         [
           {
-            "node": "Inject Scaffold",
+            "node": "Inject Ability",
             "type": "main",
             "index": 0
           }

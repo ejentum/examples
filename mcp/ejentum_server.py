@@ -38,19 +38,20 @@ mcp = FastMCP("ejentum")
 
 
 @mcp.tool()
-async def query_logic_api(query: str, mode: str = "single") -> str:
-    """Retrieve a reasoning scaffold from Ejentum's Logic API.
+async def query_logic_api(query: str, mode: str = "reasoning") -> str:
+    """Retrieve a cognitive injection from Ejentum's Logic API.
 
     Call this before making complex judgments, debugging, code review,
-    or any task where reasoning quality matters. The scaffold provides
+    or any task where reasoning quality matters. The injection provides
     suppression signals that block cognitive shortcuts.
 
     Args:
         query: Describe your current reasoning challenge in 1-2 sentences.
-        mode: "single" for Ki (1 focused ability), "multi" for Haki (4 synergized abilities).
+        mode: One of: "reasoning", "reasoning-multi", "code", "code-multi",
+              "anti-deception", "memory", "memory-multi".
 
     Returns:
-        A structured reasoning scaffold to inject into your reasoning context.
+        A structured cognitive injection to absorb into your reasoning context.
     """
     async with httpx.AsyncClient(timeout=10) as client:
         r = await client.post(
@@ -62,22 +63,22 @@ async def query_logic_api(query: str, mode: str = "single") -> str:
             json={"query": query, "mode": mode},
         )
         r.raise_for_status()
-        key = "single_ability" if mode == "single" else "multi_ability"
+        key = mode  # response key matches mode name
         return r.json()[0][key]
 
 
 @mcp.tool()
-async def query_logic_api_haki(query: str) -> str:
-    """Retrieve a compound reasoning scaffold (Haki mode: 4 synergized abilities).
+async def query_logic_api_multi(query: str, mode: str = "reasoning-multi") -> str:
+    """Retrieve a compound cognitive injection (multi mode: primary + cross-domain guards).
 
     Use this for complex, cross-domain tasks that span multiple reasoning
-    dimensions (e.g., causal + temporal + spatial). Returns merged suppression
-    vectors from 4 abilities: primary, dependency, amplifier, alternative.
+    dimensions. Returns merged suppression vectors from multiple abilities.
 
     Args:
         query: Describe your current reasoning challenge in 1-2 sentences.
+        mode: One of: "reasoning-multi", "code-multi", "memory-multi".
     """
-    return await query_logic_api(query, mode="multi")
+    return await query_logic_api(query, mode=mode)
 
 
 if __name__ == "__main__":

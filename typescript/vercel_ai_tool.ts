@@ -11,9 +11,9 @@ import { z } from "zod";
 const EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/";
 const EJENTUM_KEY = "YOUR_EJENTUM_API_KEY";
 
-export const ejentumScaffold = tool({
+export const ejentumInjection = tool({
   description:
-    "Retrieve a reasoning scaffold from Ejentum's Logic API. " +
+    "Retrieve a cognitive injection from Ejentum's Logic API. " +
     "Call this before making complex judgments. Returns suppression signals " +
     "that block cognitive shortcuts and a reasoning topology to follow.",
   parameters: z.object({
@@ -21,9 +21,9 @@ export const ejentumScaffold = tool({
       .string()
       .describe("Describe your current reasoning challenge in 1-2 sentences."),
     mode: z
-      .enum(["single", "multi"])
-      .default("single")
-      .describe("single for Ki (1 ability), multi for Haki (4 abilities)."),
+      .enum(["reasoning", "reasoning-multi", "anti-deception", "code", "code-multi", "memory", "memory-multi"])
+      .default("reasoning")
+      .describe("reasoning for general tasks. Also: code, anti-deception, memory, and multi variants."),
   }),
   execute: async ({ query, mode }) => {
     try {
@@ -38,10 +38,10 @@ export const ejentumScaffold = tool({
       });
 
       const data = await response.json();
-      const key = mode === "single" ? "single_ability" : "multi_ability";
+      const key = mode  // response key matches mode name;
       return data[0][key];
     } catch (e) {
-      return `Scaffold unavailable: ${e}. Proceed with native reasoning.`;
+      return `Injection unavailable: ${e}. Proceed with native reasoning.`;
     }
   },
 });
@@ -53,7 +53,7 @@ export const ejentumScaffold = tool({
 //
 // const result = await generateText({
 //   model: openai("gpt-4o"),
-//   tools: { ejentumScaffold },
-//   system: "You are a senior analyst. Before complex judgments, call ejentumScaffold.",
+//   tools: { ejentumInjection },
+//   system: "You are a senior analyst. Before complex judgments, call ejentumInjection.",
 //   prompt: "Why did our conversion rate drop 40% after the checkout redesign?",
 // });

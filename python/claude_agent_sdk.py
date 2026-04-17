@@ -15,9 +15,9 @@ EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 # Define the Ejentum tool for Claude
 ejentum_tool = {
-    "name": "ejentum_scaffold",
+    "name": "ejentum_injection",
     "description": (
-        "Retrieve a reasoning scaffold from Ejentum's Logic API. "
+        "Retrieve a cognitive injection from Ejentum's Logic API. "
         "Call this before making complex judgments. Returns suppression signals "
         "that block cognitive shortcuts and a reasoning topology to follow."
     ),
@@ -30,8 +30,8 @@ ejentum_tool = {
             },
             "mode": {
                 "type": "string",
-                "enum": ["single", "multi"],
-                "description": "single for focused tasks, multi for cross-domain analysis.",
+                "enum": ["reasoning", "reasoning-multi", "anti-deception", "code", "code-multi", "memory", "memory-multi"],
+                "description": "reasoning for general tasks. Also: code, anti-deception, memory, and multi variants.",
             },
         },
         "required": ["query"],
@@ -39,7 +39,7 @@ ejentum_tool = {
 }
 
 
-def call_ejentum(query: str, mode: str = "single") -> str:
+def call_ejentum(query: str, mode: str = "reasoning") -> str:
     """Execute the Ejentum API call."""
     try:
         r = requests.post(
@@ -48,10 +48,10 @@ def call_ejentum(query: str, mode: str = "single") -> str:
             json={"query": query, "mode": mode},
             timeout=5,
         )
-        key = "single_ability" if mode == "single" else "multi_ability"
+        key = mode  # response key matches mode name
         return r.json()[0][key]
     except Exception as e:
-        return f"Scaffold unavailable: {e}. Proceed with native reasoning."
+        return f"Injection unavailable: {e}. Proceed with native reasoning."
 
 
 def run_agent(task: str):
@@ -65,8 +65,8 @@ def run_agent(task: str):
         max_tokens=4096,
         system=(
             "You are a senior analyst. Before making complex judgments, "
-            "call the ejentum_scaffold tool to get a reasoning scaffold. "
-            "Inject the scaffold into your reasoning process."
+            "call the ejentum_injection tool to get a cognitive injection. "
+            "Absorb the injection into your reasoning process."
         ),
         tools=[ejentum_tool],
         messages=messages,
@@ -78,12 +78,12 @@ def run_agent(task: str):
         tool_input = tool_block.input
 
         # Call Ejentum
-        scaffold = call_ejentum(
+        injection = call_ejentum(
             query=tool_input["query"],
-            mode=tool_input.get("mode", "single"),
+            mode=tool_input.get("mode", "reasoning"),
         )
 
-        # Return scaffold to Claude
+        # Return injection to Claude
         messages.append({"role": "assistant", "content": response.content})
         messages.append({
             "role": "user",
@@ -91,7 +91,7 @@ def run_agent(task: str):
                 {
                     "type": "tool_result",
                     "tool_use_id": tool_block.id,
-                    "content": scaffold,
+                    "content": injection,
                 }
             ],
         })
@@ -100,7 +100,7 @@ def run_agent(task: str):
             model="claude-sonnet-4-20250514",
             max_tokens=4096,
             system=(
-                "You are a senior analyst. Apply the reasoning scaffold you received."
+                "You are a senior analyst. Apply the cognitive injection you received."
             ),
             tools=[ejentum_tool],
             messages=messages,

@@ -14,17 +14,17 @@ EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 @tool
-def ejentum_scaffold(query: str, mode: str = "single") -> str:
-    """Retrieve a reasoning scaffold from Ejentum's Logic API.
+def ejentum_injection(query: str, mode: str = "reasoning") -> str:
+    """Retrieve a cognitive injection from Ejentum's Logic API.
 
-    Call this before making complex judgments. The scaffold provides:
+    Call this before making complex judgments. The injection provides:
     - A failure pattern to avoid (Negative Gate)
     - Suppression signals that block cognitive shortcuts
     - A falsification test to verify your reasoning
 
     Args:
         query: Describe your current reasoning challenge in 1-2 sentences.
-        mode: "single" for focused tasks, "multi" for cross-domain analysis.
+        mode: "reasoning", "code", "anti-deception", "memory", or multi variants.
     """
     try:
         r = requests.post(
@@ -33,10 +33,10 @@ def ejentum_scaffold(query: str, mode: str = "single") -> str:
             json={"query": query, "mode": mode},
             timeout=5,
         )
-        key = "single_ability" if mode == "single" else "multi_ability"
+        key = mode  # response key matches mode name
         return r.json()[0][key]
     except Exception as e:
-        return f"Scaffold unavailable: {e}. Proceed with native reasoning."
+        return f"Injection unavailable: {e}. Proceed with native reasoning."
 
 
 # Usage with a LangChain agent:
@@ -45,5 +45,5 @@ def ejentum_scaffold(query: str, mode: str = "single") -> str:
 # from langgraph.prebuilt import create_react_agent
 #
 # llm = ChatOpenAI(model="gpt-4o")
-# agent = create_react_agent(llm, tools=[ejentum_scaffold])
+# agent = create_react_agent(llm, tools=[ejentum_injection])
 # result = agent.invoke({"messages": [("user", "Analyze this causal chain...")]})

@@ -13,13 +13,13 @@ Do NOT call for: renaming variables, formatting, simple lookups, trivial edits.
 curl -s -X POST "https://ejentum-main-ab125c3.zuplo.app/logicv1/" \
   -H "Authorization: Bearer $EJENTUM_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"query": "<your task description>", "mode": "single"}'
+  -d '{"query": "<your task description>", "mode": "reasoning"}'
 ```
 
 ## How to inject
 
-Take the `single_ability` (or `multi_ability`) value from the response and
-inject it into your reasoning BEFORE executing:
+Take the mode-named key from the response (e.g. `reasoning`, `code`,
+`anti-deception`, `memory`) and inject it into your reasoning BEFORE executing:
 
 ```
 [REASONING CONTEXT]
@@ -32,8 +32,13 @@ tendency to take shortcuts. Read them before starting.
 
 ## Modes
 
-- `single` -- one focused ability. Best for most tasks.
-- `multi` -- four synergized abilities. Use for cross-domain complexity.
+- `reasoning` -- one focused reasoning ability. Best for most tasks.
+- `reasoning-multi` -- primary + cross-domain failure guards. Use for cross-domain complexity.
+- `code` -- engineering ability for code generation, refactoring, architecture.
+- `code-multi` -- primary + cross-domain engineering guards.
+- `anti-deception` -- blocks sycophancy, hallucination, prompt injection.
+- `memory` -- perception sharpening, state tracking, behavioral calibration.
+- `memory-multi` -- primary + cross-domain perceptual guards.
 
 ## Graceful degradation
 

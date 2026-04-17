@@ -1,7 +1,7 @@
 """
 Ejentum Logic API -- Basic Python Example
 
-Minimal example: send a task, get a reasoning scaffold, print it.
+Minimal example: send a task, get a cognitive injection, print it.
 """
 
 import requests
@@ -17,12 +17,12 @@ response = requests.post(
     },
     json={
         "query": "Why did our conversion rate drop 40% after the checkout redesign?",
-        "mode": "single",  # "single" for Ki (1 ability), "multi" for Haki (4 abilities)
+        "mode": "reasoning",  # or "code", "anti-deception", "memory", "reasoning-multi", etc.
     },
     timeout=5,
 )
 
 data = response.json()
-scaffold = data[0]["single_ability"]  # or "multi_ability" for Haki mode
+injection = data[0]["reasoning"]  # response key matches mode name
 
-print(scaffold)
+print(injection)

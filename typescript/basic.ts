@@ -1,13 +1,13 @@
 /**
  * Ejentum Logic API -- Basic TypeScript Example
  *
- * Minimal example: send a task, get a reasoning scaffold, print it.
+ * Minimal example: send a task, get a cognitive injection, print it.
  */
 
 const EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/";
 const API_KEY = "YOUR_EJENTUM_API_KEY"; // Get yours at ejentum.com/dashboard
 
-async function getScaffold(query: string, mode: "single" | "multi" = "single") {
+async function getInjection(query: string, mode: "reasoning" | "reasoning-multi" | "anti-deception" | "code" | "code-multi" | "memory" | "memory-multi" = "reasoning") {
   const response = await fetch(EJENTUM_URL, {
     method: "POST",
     headers: {
@@ -18,13 +18,13 @@ async function getScaffold(query: string, mode: "single" | "multi" = "single") {
   });
 
   const data = await response.json();
-  const key = mode === "single" ? "single_ability" : "multi_ability";
+  const key = mode  // response key matches mode name;
   return data[0][key];
 }
 
 // Usage
-const scaffold = await getScaffold(
+const injection = await getInjection(
   "Why did our conversion rate drop 40% after the checkout redesign?"
 );
 
-console.log(scaffold);
+console.log(injection);

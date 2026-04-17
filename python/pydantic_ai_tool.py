@@ -14,20 +14,20 @@ EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
-class ScaffoldRequest(BaseModel):
+class InjectionRequest(BaseModel):
     query: str
-    mode: str = "single"
+    mode: str = "reasoning"
 
 
-async def get_scaffold(ctx: RunContext[None], query: str, mode: str = "single") -> str:
-    """Retrieve a reasoning scaffold from Ejentum's Logic API.
+async def get_injection(ctx: RunContext[None], query: str, mode: str = "reasoning") -> str:
+    """Retrieve a cognitive injection from Ejentum's Logic API.
 
-    Call this before making complex judgments. The scaffold provides
+    Call this before making complex judgments. The injection provides
     suppression signals that block cognitive shortcuts.
 
     Args:
         query: Describe your current reasoning challenge in 1-2 sentences.
-        mode: "single" for Ki (1 ability), "multi" for Haki (4 abilities).
+        mode: "reasoning", "code", "anti-deception", "memory", or multi variants.
     """
     async with httpx.AsyncClient(timeout=5) as client:
         try:
@@ -40,20 +40,20 @@ async def get_scaffold(ctx: RunContext[None], query: str, mode: str = "single") 
                 json={"query": query, "mode": mode},
             )
             r.raise_for_status()
-            key = "single_ability" if mode == "single" else "multi_ability"
+            key = mode  # response key matches mode name
             return r.json()[0][key]
         except Exception as e:
-            return f"Scaffold unavailable: {e}. Proceed with native reasoning."
+            return f"Injection unavailable: {e}. Proceed with native reasoning."
 
 
 agent = Agent(
     "openai:gpt-4o",
     system_prompt=(
         "You are a senior analyst. Before making complex judgments, "
-        "call the get_scaffold tool to retrieve a reasoning scaffold. "
-        "Apply the scaffold's suppression signals before answering."
+        "call the get_injection tool to retrieve a cognitive injection. "
+        "Apply the injection's suppression signals before answering."
     ),
-    tools=[Tool(get_scaffold)],
+    tools=[Tool(get_injection)],
 )
 
 

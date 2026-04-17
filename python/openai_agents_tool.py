@@ -14,15 +14,15 @@ EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 @function_tool
-def ejentum_scaffold(query: str, mode: str = "single") -> str:
-    """Retrieve a reasoning scaffold from Ejentum's Logic API.
+def ejentum_injection(query: str, mode: str = "reasoning") -> str:
+    """Retrieve a cognitive injection from Ejentum's Logic API.
 
     Call this before making complex judgments. Returns suppression signals
     that block cognitive shortcuts and a reasoning topology to follow.
 
     Args:
         query: Describe your current reasoning challenge in 1-2 sentences.
-        mode: "single" for focused tasks, "multi" for cross-domain analysis.
+        mode: "reasoning", "code", "anti-deception", "memory", or multi variants.
     """
     try:
         r = requests.post(
@@ -31,20 +31,20 @@ def ejentum_scaffold(query: str, mode: str = "single") -> str:
             json={"query": query, "mode": mode},
             timeout=5,
         )
-        key = "single_ability" if mode == "single" else "multi_ability"
+        key = mode  # response key matches mode name
         return r.json()[0][key]
     except Exception as e:
-        return f"Scaffold unavailable: {e}. Proceed with native reasoning."
+        return f"Injection unavailable: {e}. Proceed with native reasoning."
 
 
 agent = Agent(
     name="Analyst",
     instructions=(
         "You are a senior analyst. Before making complex judgments, "
-        "call the ejentum_scaffold tool to get a reasoning scaffold. "
-        "Inject the scaffold into your reasoning process before answering."
+        "call the ejentum_injection tool to get a cognitive injection. "
+        "Absorb the injection into your reasoning process before answering."
     ),
-    tools=[ejentum_scaffold],
+    tools=[ejentum_injection],
 )
 
 

@@ -15,24 +15,26 @@ Choose **POST** as the action event.
 | **URL** | `https://ejentum-main-ab125c3.zuplo.app/logicv1/` |
 | **Payload Type** | json |
 | **Data** | `query`: your task description from a previous step |
-| **Data** | `mode`: `single` (or `multi` for Haki) |
+| **Data** | `mode`: `reasoning` (or any mode — see table below) |
 | **Headers** | `Authorization`: `Bearer YOUR_EJENTUM_API_KEY` |
 | **Headers** | `Content-Type`: `application/json` |
 
 ### 3. Use the response
 
-The webhook returns a JSON array. Access the scaffold:
+The webhook returns a JSON array. The response key matches the mode name:
 
-- **Ki mode:** Use `single_ability` from the first item
-- **Haki mode:** Use `multi_ability` from the first item
+- `reasoning` mode → access `reasoning` from the first item
+- `code` mode → access `code` from the first item
+- `anti-deception` mode → access `anti-deception` from the first item
+- `memory` mode → access `memory` from the first item
 
 ### 4. Inject into your AI step
 
-In your next Zap step (ChatGPT, Claude, or any AI action), prepend the scaffold to the prompt:
+In your next Zap step (ChatGPT, Claude, or any AI action), prepend the injection to the prompt:
 
 ```
 [REASONING CONTEXT]
-{{scaffold from webhook step}}
+{{injection from webhook step}}
 [END REASONING CONTEXT]
 
 Your original prompt here.
@@ -42,10 +44,16 @@ Your original prompt here.
 
 | Mode | Plan Required | What it returns |
 |------|--------------|-----------------|
-| `single` | Free or Ki | One reasoning scaffold (~500 tokens) |
-| `multi` | Haki | Four synergized scaffolds (~900 tokens) |
+| `reasoning` | Free / Ki | One reasoning ability (~500 tokens) |
+| `code` | Free / Ki | One engineering ability (~500 tokens) |
+| `anti-deception` | Free / Ki | One protective ability (~500 tokens) |
+| `memory` | Free / Ki | One perceptual ability (~500 tokens) |
+| `reasoning-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
+| `code-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
+| `memory-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
 
 ## Links
 
 - [Get your API key](https://ejentum.com/dashboard) (100 free calls, no card)
 - [Full integration guide](https://ejentum.com/docs/integrations)
+- [Product layers](https://ejentum.com/docs/reasoning_harness)

@@ -16,8 +16,8 @@ TIMEOUT_SECONDS = 3
 MAX_RETRIES = 1
 
 
-def get_scaffold(query: str, mode: str = "single") -> str | None:
-    """Retrieve scaffold with timeout and retry. Returns None on failure."""
+def get_injection(query: str, mode: str = "reasoning") -> str | None:
+    """Retrieve injection with timeout and retry. Returns None on failure."""
 
     for attempt in range(MAX_RETRIES + 1):
         try:
@@ -31,11 +31,11 @@ def get_scaffold(query: str, mode: str = "single") -> str | None:
                 timeout=TIMEOUT_SECONDS,
             )
             r.raise_for_status()
-            key = "single_ability" if mode == "single" else "multi_ability"
-            scaffold = r.json()[0][key]
+            key = mode  # response key matches mode name
+            injection = r.json()[0][key]
 
-            if scaffold and len(scaffold) > 50:
-                return scaffold
+            if injection and len(injection) > 50:
+                return injection
 
             return None  # Empty or malformed response
 
@@ -49,15 +49,15 @@ def get_scaffold(query: str, mode: str = "single") -> str | None:
             return None
 
 
-def build_system_prompt(base_prompt: str, task: str, mode: str = "single") -> str:
-    """Build system prompt with optional scaffold injection."""
+def build_system_prompt(base_prompt: str, task: str, mode: str = "reasoning") -> str:
+    """Build system prompt with optional injection."""
 
-    scaffold = get_scaffold(task, mode)
+    injection = get_injection(task, mode)
 
-    if scaffold:
-        return f"[REASONING CONTEXT]\n{scaffold}\n[END REASONING CONTEXT]\n\n{base_prompt}"
+    if injection:
+        return f"[REASONING CONTEXT]\n{injection}\n[END REASONING CONTEXT]\n\n{base_prompt}"
 
-    # Graceful degradation: no scaffold, no change
+    # Graceful degradation: no injection, no change
     return base_prompt
 
 
@@ -68,6 +68,6 @@ def build_system_prompt(base_prompt: str, task: str, mode: str = "single") -> st
 #
 # system_prompt = build_system_prompt(base, task)
 #
-# # system_prompt now contains the scaffold if available,
+# # system_prompt now contains the injection if available,
 # # or just the base prompt if the API was unreachable.
 # # Your agent works either way.
