@@ -58,6 +58,8 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 | [skill-files/skill_memory.md](skill-files/skill_memory.md) | Any agent | Memory-only skill file (101 abilities, two-pass protocol) |
 | [skill-files/.cursorrules](skill-files/.cursorrules) | Cursor | Cursor-specific condensed rules file |
 
+The MCP server above is a Python reference example you can host yourself. If you prefer a packaged version that installs with one command, the published [ejentum-mcp](https://github.com/ejentum/ejentum-mcp) (npm `ejentum-mcp`) is the same shape: `npx -y ejentum-mcp` plus `EJENTUM_API_KEY` and the four harnesses appear as MCP tools.
+
 ### No-Code
 
 | File | Platform | What it does |
