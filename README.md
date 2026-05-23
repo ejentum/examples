@@ -40,6 +40,7 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 |------|-----------|-------------|
 | [python/langchain_tool.py](python/langchain_tool.py) | LangChain / LangGraph | `@tool` decorator wrapping Logic API call |
 | [python/openai_agents_tool.py](python/openai_agents_tool.py) | OpenAI Agents SDK | Function tool for the Responses API |
+| [python/openai_agents_streamable_http.py](python/openai_agents_streamable_http.py) | OpenAI Agents SDK + MCP | Same SDK, streamable-HTTP MCP transport with bearer auth |
 | [python/claude_agent_sdk.py](python/claude_agent_sdk.py) | Anthropic Claude SDK | `tool_use` definition for Claude agents |
 | [python/crewai_tool.py](python/crewai_tool.py) | CrewAI | `BaseTool` subclass for multi-agent crews |
 | [python/pydantic_ai_tool.py](python/pydantic_ai_tool.py) | Pydantic AI | Type-safe tool with async support |
