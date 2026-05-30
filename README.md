@@ -1,15 +1,15 @@
 # Ejentum Integration Examples
 
-Runnable code examples for integrating [Ejentum's Logic API](https://ejentum.com) into your agent, framework, or workflow.
+Runnable code examples for integrating [Ejentum's Ejentum API](https://ejentum.com) into your agent, framework, or workflow.
 
-The Logic API retrieves engineered cognitive operations and returns structured cognitive injections. One POST request. These examples show how to make that call from every major environment.
+The Ejentum API retrieves engineered cognitive operations and returns structured cognitive injections. One POST request. These examples show how to make that call from every major environment.
 
 ---
 
 ## Quick Start
 
 ```bash
-curl -X POST "https://ejentum-main-ab125c3.zuplo.app/logicv1/" \
+curl -X POST "https://api.ejentum.com/harness/" \
   -H "Authorization: Bearer YOUR_KEY" \
   -H "Content-Type: application/json" \
   -d '{"query": "Why did deployment fail after the config change?", "mode": "reasoning"}'
@@ -17,7 +17,7 @@ curl -X POST "https://ejentum-main-ab125c3.zuplo.app/logicv1/" \
 
 **7 modes:** `reasoning`, `reasoning-multi`, `code`, `code-multi`, `anti-deception`, `memory`, `memory-multi`
 
-Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejentum.com/dashboard)
+Get your free API key (30-day trial, no card): [ejentum.com/dashboard](https://ejentum.com/dashboard)
 
 ---
 
@@ -38,7 +38,7 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 
 | File | Framework | What it does |
 |------|-----------|-------------|
-| [python/langchain_tool.py](python/langchain_tool.py) | LangChain / LangGraph | `@tool` decorator wrapping Logic API call |
+| [python/langchain_tool.py](python/langchain_tool.py) | LangChain / LangGraph | `@tool` decorator wrapping Ejentum API call |
 | [python/openai_agents_tool.py](python/openai_agents_tool.py) | OpenAI Agents SDK | Function tool for the Responses API |
 | [python/openai_agents_streamable_http.py](python/openai_agents_streamable_http.py) | OpenAI Agents SDK + MCP | Same SDK, streamable-HTTP MCP transport with bearer auth |
 | [python/claude_agent_sdk.py](python/claude_agent_sdk.py) | Anthropic Claude SDK | `tool_use` definition for Claude agents |
@@ -51,7 +51,7 @@ Get your free API key (100 calls, no card): [ejentum.com/dashboard](https://ejen
 
 | File | Environment | What it does |
 |------|------------|-------------|
-| [mcp/ejentum_server.py](mcp/ejentum_server.py) | **All MCP clients** (Cursor, Claude Code, Windsurf, Continue, Cline, Copilot) | MCP server exposing Logic API as a tool. One server, all IDEs. |
+| [mcp/ejentum_server.py](mcp/ejentum_server.py) | **All MCP clients** (Cursor, Claude Code, Windsurf, Continue, Cline, Copilot) | MCP server exposing Ejentum API as a tool. One server, all IDEs. |
 | [skill-files/ejentum_logic_api.md](skill-files/ejentum_logic_api.md) | Cursor, Windsurf, Claude Code, Codex | Unified skill file: all 4 harnesses, autonomous routing |
 | [skill-files/skill_reasoning.md](skill-files/skill_reasoning.md) | Any agent | Reasoning-only skill file (311 abilities, 6 dimensions) |
 | [skill-files/skill_code.md](skill-files/skill_code.md) | Any agent | Code-only skill file (128 abilities, 13 disciplines) |
@@ -73,14 +73,14 @@ The MCP server above is a Python reference example you can host yourself. If you
 
 ## How It Works
 
-1. Your agent sends a task description to the Logic API
+1. Your agent sends a task description to the Ejentum API
 2. The API returns a structured cognitive injection (~400-900 tokens)
 3. You inject it into your agent's context window BEFORE the task
 4. The agent reasons with suppression signals active, blocking cognitive shortcuts
 
 ```
 [REASONING CONTEXT]
-{injection from Logic API}
+{injection from Ejentum API}
 [END REASONING CONTEXT]
 
 {your agent's actual task}
@@ -92,7 +92,7 @@ The MCP server above is a Python reference example you can host yourself. If you
 
 ## Skill Files
 
-Skill files teach an agent how to call the Logic API autonomously. Drop one into your IDE or agent and it handles mode selection, injection, and multi-turn drift monitoring.
+Skill files teach an agent how to call the Ejentum API autonomously. Drop one into your IDE or agent and it handles mode selection, injection, and multi-turn drift monitoring.
 
 - **[Ejentum Skill File (all modes)](skill-files/ejentum_logic_api.md)**. autonomous routing across all 4 harnesses, mode stacking, multi-turn drift monitoring
 - **[Reasoning](skill-files/skill_reasoning.md)** · **[Code](skill-files/skill_code.md)** · **[Anti-Deception](skill-files/skill_anti_deception.md)** · **[Memory](skill-files/skill_memory.md)**. product-specific skill files

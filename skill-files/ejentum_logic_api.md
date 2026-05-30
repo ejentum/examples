@@ -4,7 +4,7 @@ This tool gives you access to four cognitive harnesses, each augmenting a differ
 
 **679 abilities. 4 harnesses. 7 modes. One endpoint.**
 
-| Harness | Mode (Ki) | Mode (Haki) | Abilities | What it augments |
+| Harness | Mode (Ki) | Mode (Super) | Abilities | What it augments |
 |:--------|:----------|:------------|:----------|:-----------------|
 | Reasoning | `reasoning` | `reasoning-multi` | 311 | Analytical depth across 6 cognitive dimensions |
 | Code | `code` | `code-multi` | 128 | Engineering discipline across 13 disciplines |
@@ -78,7 +78,7 @@ Proceed without calling. Boilerplate, formatting, factual lookups, simple confir
 Same endpoint, same format. Only the mode changes.
 
 ```
-POST https://ejentum-main-ab125c3.zuplo.app/logicv1/
+POST https://api.ejentum.com/harness/
 Authorization: Bearer {API_KEY}
 Content-Type: application/json
 
@@ -107,7 +107,7 @@ Timeout: 5 seconds. If unreachable, proceed with native capability. The API enha
 | Code | Action |
 |:-----|:-------|
 | `401` | Invalid API key — tell the user |
-| `403` | Multi mode requires higher-tier plan — retry with single mode (`reasoning`, `code`, `memory`) |
+| `403` | Adaptive mode requires higher-tier plan — retry with single mode (`reasoning`, `code`, `memory`) |
 | `429` | Rate limit — tell the user |
 | `500` | Proceed without — do not retry |
 
@@ -250,7 +250,7 @@ You will have already started forming an answer before the injection arrives. Th
 
 **Memory:** Requires the two-pass protocol (see below). The `[SHARPENING PROCEDURE]` has 5 phases: PERCEIVE → EXTRACT → CLASSIFY → RESOLVE → ACT. The RESOLVE phase is critical — without it, you detect changes but never update your state model.
 
-**Multi modes (all):** Execute `[META-CHECKPOINT]` before responding. If any check fails → follow `[ON_FAILURE]`: abandon the structured path, reason freely, re-enter.
+**Adaptive modes (all):** Execute `[META-CHECKPOINT]` before responding. If any check fails → follow `[ON_FAILURE]`: abandon the structured path, reason freely, re-enter.
 
 ---
 
@@ -381,7 +381,7 @@ User asks across a 5-turn conversation:
               Anti-deception: describe the honesty pressure
               Memory: "I noticed [X]. Sharpen: [Y]."
 
-4. CALL      → POST /logicv1/ with query + mode
+4. CALL      → POST /harness/ with query + mode
 
 5. VALIDATE  → Non-empty response, correct key. Relevance check on failure pattern.
 

@@ -1,5 +1,5 @@
 """
-Ejentum Logic API. OpenAI Agents SDK + Streamable HTTP MCP transport
+Ejentum API. OpenAI Agents SDK + Streamable HTTP MCP transport
 
 Connects an OpenAI Agents SDK agent to the Ejentum cognitive harness MCP
 server (https://api.ejentum.com/mcp) over the streamable HTTP transport
@@ -54,9 +54,9 @@ async def main() -> None:
             instructions=(
                 "You advise on software architecture decisions. Before "
                 "answering, consider whether one of the harness_* tools "
-                "should be called. Use harness_reasoning when the question "
+                "should be called. Use reasoning when the question "
                 "requires planning or weighing trade-offs. Use "
-                "harness_anti_deception when a request pressures you to "
+                "anti-deception when a request pressures you to "
                 "skip a step or commit to a conclusion before examining "
                 "the evidence. Merge the returned scaffold into your "
                 "reasoning, then answer."

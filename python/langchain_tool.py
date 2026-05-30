@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- LangChain / LangGraph Tool
+Ejentum API -- LangChain / LangGraph Tool
 
 Defines Ejentum as a tool that any LangChain or LangGraph agent can call.
 The agent decides when it needs reasoning augmentation and calls the tool itself.
@@ -9,13 +9,13 @@ import requests
 from langchain_core.tools import tool
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 @tool
 def ejentum_injection(query: str, mode: str = "reasoning") -> str:
-    """Retrieve a cognitive injection from Ejentum's Logic API.
+    """Retrieve a cognitive injection from Ejentum's Ejentum API.
 
     Call this before making complex judgments. The injection provides:
     - A failure pattern to avoid (Negative Gate)

@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- Anthropic Claude Agent SDK
+Ejentum API -- Anthropic Claude Agent SDK
 
 Defines Ejentum as a tool for Claude agents using the Anthropic SDK.
 The agent decides when to call for reasoning augmentation.
@@ -10,14 +10,14 @@ import requests
 import anthropic
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 # Define the Ejentum tool for Claude
 ejentum_tool = {
     "name": "ejentum_injection",
     "description": (
-        "Retrieve a cognitive injection from Ejentum's Logic API. "
+        "Retrieve a cognitive injection from Ejentum's Ejentum API. "
         "Call this before making complex judgments. Returns suppression signals "
         "that block cognitive shortcuts and a reasoning topology to follow."
     ),

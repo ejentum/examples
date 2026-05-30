@@ -1,7 +1,7 @@
 """
-Ejentum Logic API -- MCP Server
+Ejentum API -- MCP Server
 
-A Model Context Protocol server that exposes Ejentum's Logic API as a tool.
+A Model Context Protocol server that exposes Ejentum's Ejentum API as a tool.
 Works with ALL MCP-compatible clients: Cursor, Claude Code, Windsurf,
 Continue, Cline, GitHub Copilot, Roo Code.
 
@@ -31,7 +31,7 @@ import os
 import httpx
 from mcp.server.fastmcp import FastMCP
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 API_KEY = os.environ.get("EJENTUM_API_KEY", "YOUR_EJENTUM_API_KEY")
 
 mcp = FastMCP("ejentum")
@@ -39,7 +39,7 @@ mcp = FastMCP("ejentum")
 
 @mcp.tool()
 async def query_logic_api(query: str, mode: str = "reasoning") -> str:
-    """Retrieve a cognitive injection from Ejentum's Logic API.
+    """Retrieve a cognitive injection from Ejentum's Ejentum API.
 
     Call this before making complex judgments, debugging, code review,
     or any task where reasoning quality matters. The injection provides

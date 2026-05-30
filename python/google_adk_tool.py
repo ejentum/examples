@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- Google Agent Development Kit (ADK)
+Ejentum API -- Google Agent Development Kit (ADK)
 
 Defines Ejentum as a function tool for Google ADK agents.
 The agent decides when to call for reasoning augmentation.
@@ -10,12 +10,12 @@ from google.adk.agents import Agent
 from google.adk.tools import FunctionTool
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 def ejentum_injection(query: str, mode: str = "reasoning") -> str:
-    """Retrieve a cognitive injection from Ejentum's Logic API.
+    """Retrieve a cognitive injection from Ejentum's Ejentum API.
 
     Call this before making complex judgments. Returns suppression signals
     that block cognitive shortcuts and a reasoning topology to follow.

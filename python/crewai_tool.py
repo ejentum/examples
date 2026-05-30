@@ -1,8 +1,8 @@
 """
-Ejentum Logic API -- CrewAI Tool
+Ejentum API -- CrewAI Tool
 
 Defines Ejentum as a tool for CrewAI agents. Each crew member can call
-the Logic API before executing its task. The injection is absorbed into
+the Ejentum API before executing its task. The injection is absorbed into
 the agent's reasoning context via the backstory or tool result.
 """
 
@@ -11,14 +11,14 @@ from crewai.tools import BaseTool
 from pydantic import Field
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 class EjentumInjectionTool(BaseTool):
     name: str = "ejentum_injection"
     description: str = (
-        "Retrieve a cognitive injection from Ejentum's Logic API. "
+        "Retrieve a cognitive injection from Ejentum's Ejentum API. "
         "Call this before making complex judgments. Returns suppression signals "
         "that block cognitive shortcuts and a reasoning topology to follow. "
         "Input: a 1-2 sentence description of your current reasoning challenge."

@@ -1,12 +1,12 @@
 """
-Ejentum Logic API -- Basic Python Example
+Ejentum API -- Basic Python Example
 
 Minimal example: send a task, get a cognitive injection, print it.
 """
 
 import requests
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 API_KEY = "YOUR_EJENTUM_API_KEY"  # Get yours at ejentum.com/dashboard
 
 response = requests.post(

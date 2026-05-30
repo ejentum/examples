@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- Inject Into Agent
+Ejentum API -- Inject Into Agent
 
 Full flow: retrieve a cognitive injection and inject it into an LLM call.
 The injection tells the model what patterns to follow and what failure modes to block.
@@ -8,7 +8,7 @@ The injection tells the model what patterns to follow and what failure modes to 
 import requests
 from openai import OpenAI  # or any LLM client
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 # Step 1: Get the cognitive injection

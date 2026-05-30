@@ -1,7 +1,7 @@
 """
-Ejentum Logic API -- Graceful Degradation Pattern
+Ejentum API -- Graceful Degradation Pattern
 
-Production pattern: call the Logic API with timeout and fallback.
+Production pattern: call the Ejentum API with timeout and fallback.
 If the API is unreachable, the agent continues on native reasoning.
 Ejentum is an enhancement layer, not a critical-path dependency.
 """
@@ -10,7 +10,7 @@ import time
 import requests
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 TIMEOUT_SECONDS = 3
 MAX_RETRIES = 1

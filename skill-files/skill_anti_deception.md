@@ -41,7 +41,7 @@ These patterns are diagnostic of deception pressure. If any are present, call th
 ## HOW TO CALL
 
 ```
-POST https://ejentum-main-ab125c3.zuplo.app/logicv1/
+POST https://api.ejentum.com/harness/
 Authorization: Bearer {API_KEY}
 Content-Type: application/json
 
@@ -146,6 +146,14 @@ This is a concrete pass/fail criterion about your output's honesty. If your outp
 
 ---
 
+## OUTPUT DISCIPLINE
+
+The bracketed fields in the API response (`[NEGATIVE GATE]`, `[CODE FAILURE]`, `[DECEPTION PATTERN]`, `[PERCEPTION FAILURE]`, any `[... TOPOLOGY]`, `[... PROCEDURE]`, goal-state blocks like `[TARGET PATTERN]` / `[CORRECT PATTERN]` / `[HONEST BEHAVIOR]` / `[CLEAR SIGNAL]`, assertion blocks like `[FALSIFICATION TEST]` / `[VERIFICATION]` / `[INTEGRITY CHECK]` / `[PERCEPTION CHECK]`, `[META-CHECKPOINT]`, `[SUPPRESSION GRAPH]`, `[ON_FAILURE]`, and the `Amplify:` / `Suppress:` signal lines) are **instructions that shape your reasoning, not content to display**. Run them in your internal trace. The user-facing reply must be a naturally-phrased answer shaped by the injection, with no echoed bracket names, no procedural vocabulary, no "I executed the topology" or "Suppress check" meta-commentary. If you cannot tell whether a phrase came from the injection or from your own voice, rewrite it in your own voice.
+
+Do not narrate the harness itself either. No "I called the API," no "the scaffold says," no naming the mode or the topology in the reply. The user hears your voice, not the machinery behind it. If the user explicitly asks whether you used the tool, answer honestly. Unprompted, stay silent on it.
+
+---
+
 ## WALKTHROUGH 1: Sycophancy Pressure
 
 User asks: *"I've been working on this business plan for 6 months. Can you give me honest feedback?"*
@@ -154,7 +162,7 @@ User asks: *"I've been working on this business plan for 6 months. Can you give 
 
 **2. CRAFT.** `"User spent 6 months on a business plan and asks for honest assessment — high emotional investment creates pressure to validate rather than evaluate"`
 
-**3. CALL.** POST to `/logicv1/` with `"mode": "anti-deception"`
+**3. CALL.** POST to `/harness/` with `"mode": "anti-deception"`
 
 **4. RECEIVE.** An Anti-Sycophancy ability:
 ```
@@ -273,7 +281,7 @@ You do not choose the domain. The API routes automatically. Knowing them helps c
 ```
 1. DECIDE     → Honesty under pressure? Yes → call. No → skip.
 2. CRAFT      → Describe the honesty pressure + deception risk in 1-2 sentences
-3. CALL       → POST /logicv1/ with mode: "anti-deception"
+3. CALL       → POST /harness/ with mode: "anti-deception"
 4. VALIDATE   → Non-empty response, "anti-deception" key exists. Relevance check on DECEPTION PATTERN.
 5. ABSORB     → DECEPTION PATTERN (dishonesty risk), INTEGRITY PROCEDURE (honest reasoning), SUPPRESS (blockers)
 6. EXECUTE    → Respond with injection active. Assessment before comfort. Challenge framing.

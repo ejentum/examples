@@ -1,10 +1,10 @@
 /**
- * Ejentum Logic API -- Basic TypeScript Example
+ * Ejentum API -- Basic TypeScript Example
  *
  * Minimal example: send a task, get a cognitive injection, print it.
  */
 
-const EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/";
+const EJENTUM_URL = "https://api.ejentum.com/harness/";
 const API_KEY = "YOUR_EJENTUM_API_KEY"; // Get yours at ejentum.com/dashboard
 
 async function getInjection(query: string, mode: "reasoning" | "reasoning-multi" | "anti-deception" | "code" | "code-multi" | "memory" | "memory-multi" = "reasoning") {

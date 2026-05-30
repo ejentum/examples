@@ -1,5 +1,5 @@
 /**
- * Ejentum Logic API -- Vercel AI SDK Tool
+ * Ejentum API -- Vercel AI SDK Tool
  *
  * Defines Ejentum as a tool for agents built with the Vercel AI SDK.
  * Uses Zod for input validation. Works with any Vercel AI provider.
@@ -8,12 +8,12 @@
 import { tool } from "ai";
 import { z } from "zod";
 
-const EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/";
+const EJENTUM_URL = "https://api.ejentum.com/harness/";
 const EJENTUM_KEY = "YOUR_EJENTUM_API_KEY";
 
 export const ejentumInjection = tool({
   description:
-    "Retrieve a cognitive injection from Ejentum's Logic API. " +
+    "Retrieve a cognitive injection from Ejentum's Ejentum API. " +
     "Call this before making complex judgments. Returns suppression signals " +
     "that block cognitive shortcuts and a reasoning topology to follow.",
   parameters: z.object({

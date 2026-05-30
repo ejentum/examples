@@ -1,4 +1,4 @@
-# Ejentum Logic API -- Make.com Integration
+# Ejentum API -- Make.com Integration
 
 No-code integration using Make.com's HTTP module.
 
@@ -12,7 +12,7 @@ Add an **HTTP > Make a request** module.
 
 | Field | Value |
 |-------|-------|
-| **URL** | `https://ejentum-main-ab125c3.zuplo.app/logicv1/` |
+| **URL** | `https://api.ejentum.com/harness/` |
 | **Method** | POST |
 | **Headers** | `Authorization: Bearer YOUR_EJENTUM_API_KEY` |
 | **Headers** | `Content-Type: application/json` |
@@ -48,9 +48,9 @@ Your original system prompt here.
 | `code` | Code generation, refactoring, architecture (128 abilities) | Free / Ki |
 | `anti-deception` | Blocks sycophancy, hallucination, injection (139 abilities) | Free / Ki |
 | `memory` | Perception sharpening, state tracking (101 abilities) | Free / Ki |
-| `reasoning-multi` | Primary + cross-domain failure guards | Haki |
-| `code-multi` | Primary + cross-domain engineering guards | Haki |
-| `memory-multi` | Primary + cross-domain perceptual guards | Haki |
+| `reasoning-multi` | Primary + cross-domain failure guards | Super |
+| `code-multi` | Primary + cross-domain engineering guards | Super |
+| `memory-multi` | Primary + cross-domain perceptual guards | Super |
 
 ## Graceful Degradation
 

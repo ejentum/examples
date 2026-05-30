@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- Pydantic AI Tool
+Ejentum API -- Pydantic AI Tool
 
 Type-safe tool definition for Pydantic AI agents. Uses Pydantic models
 for input validation and structured output.
@@ -10,7 +10,7 @@ from pydantic_ai import Agent, RunContext, Tool
 from pydantic import BaseModel
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
@@ -20,7 +20,7 @@ class InjectionRequest(BaseModel):
 
 
 async def get_injection(ctx: RunContext[None], query: str, mode: str = "reasoning") -> str:
-    """Retrieve a cognitive injection from Ejentum's Logic API.
+    """Retrieve a cognitive injection from Ejentum's Ejentum API.
 
     Call this before making complex judgments. The injection provides
     suppression signals that block cognitive shortcuts.

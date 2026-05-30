@@ -33,7 +33,7 @@ This tool augments YOUR code generation. When you call it, you receive a cogniti
 ## HOW TO CALL
 
 ```
-POST https://ejentum-main-ab125c3.zuplo.app/logicv1/
+POST https://api.ejentum.com/harness/
 Authorization: Bearer {API_KEY}
 Content-Type: application/json
 
@@ -96,7 +96,7 @@ Parse the value of the mode-named key. The string is ready to use.
 | Code | Meaning | Action |
 |:-----|:--------|:-------|
 | `401` | Invalid API key | Tell the user their key needs checking |
-| `403` | Multi mode requires Haki plan | Retry with `"mode": "code"` |
+| `403` | Adaptive mode requires Go or Super tier | Retry with `"mode": "code"` |
 | `429` | Rate limit or quota exceeded | Tell the user they've hit their limit |
 | `500` | Server error | Proceed without — do not retry |
 
@@ -147,10 +147,18 @@ After writing your code, **actively scan it** against each suppressed pattern. I
 ### 7. Verify against `[VERIFICATION]`
 This is a concrete pass/fail criterion about your code's correctness. If your code fails it, restructure.
 
-### 8. (Multi mode only) Execute `[META-CHECKPOINT]` before responding
+### 8. (Adaptive mode only) Execute `[META-CHECKPOINT]` before responding
 Run each check against your code. If ANY check fails → follow `[ON_FAILURE]`: abandon the structured approach, reason freely about which engineering assumption broke, then re-enter at the appropriate step.
 
 **Precedence:** If the injection's topology leads to a different algorithm or architecture than your first choice — follow the topology. The injection was matched to the task's specific failure pattern. Your first instinct was not.
+
+---
+
+## OUTPUT DISCIPLINE
+
+The bracketed fields in the API response (`[NEGATIVE GATE]`, `[CODE FAILURE]`, `[DECEPTION PATTERN]`, `[PERCEPTION FAILURE]`, any `[... TOPOLOGY]`, `[... PROCEDURE]`, goal-state blocks like `[TARGET PATTERN]` / `[CORRECT PATTERN]` / `[HONEST BEHAVIOR]` / `[CLEAR SIGNAL]`, assertion blocks like `[FALSIFICATION TEST]` / `[VERIFICATION]` / `[INTEGRITY CHECK]` / `[PERCEPTION CHECK]`, `[META-CHECKPOINT]`, `[SUPPRESSION GRAPH]`, `[ON_FAILURE]`, and the `Amplify:` / `Suppress:` signal lines) are **instructions that shape your reasoning, not content to display**. Run them in your internal trace. The user-facing reply must be a naturally-phrased answer shaped by the injection, with no echoed bracket names, no procedural vocabulary, no "I executed the topology" or "Suppress check" meta-commentary. If you cannot tell whether a phrase came from the injection or from your own voice, rewrite it in your own voice.
+
+Do not narrate the harness itself either. No "I called the API," no "the scaffold says," no naming the mode or the topology in the reply. The user hears your voice, not the machinery behind it. If the user explicitly asks whether you used the tool, answer honestly. Unprompted, stay silent on it.
 
 ---
 
@@ -324,7 +332,7 @@ You do not choose the domain. The API routes automatically. Knowing them helps c
 1. DECIDE     → Task matches a code pattern? Yes → call. No → skip.
 2. MODE       → Single concern → "code". Cross-cutting → "code-multi".
 3. CRAFT      → Specific task + failure risk in 1-2 sentences
-4. CALL       → POST /logicv1/ with query + mode
+4. CALL       → POST /harness/ with query + mode
 5. VALIDATE   → Non-empty response, key matches mode. Relevance check on CODE FAILURE.
 6. ABSORB     → CODE FAILURE (wrong code), PROCEDURE (plan + backtrack), SUPPRESS (blockers)
 7. EXECUTE    → Write code following topology, compare against CORRECT PATTERN

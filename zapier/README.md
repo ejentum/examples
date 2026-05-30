@@ -1,4 +1,4 @@
-# Ejentum Logic API -- Zapier Integration
+# Ejentum API -- Zapier Integration
 
 No-code integration using Zapier's Webhooks action.
 
@@ -12,7 +12,7 @@ Choose **POST** as the action event.
 
 | Field | Value |
 |-------|-------|
-| **URL** | `https://ejentum-main-ab125c3.zuplo.app/logicv1/` |
+| **URL** | `https://api.ejentum.com/harness/` |
 | **Payload Type** | json |
 | **Data** | `query`: your task description from a previous step |
 | **Data** | `mode`: `reasoning` (or any mode — see table below) |
@@ -48,9 +48,9 @@ Your original prompt here.
 | `code` | Free / Ki | One engineering ability (~500 tokens) |
 | `anti-deception` | Free / Ki | One protective ability (~500 tokens) |
 | `memory` | Free / Ki | One perceptual ability (~500 tokens) |
-| `reasoning-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
-| `code-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
-| `memory-multi` | Haki | Primary + cross-domain guards (~900 tokens) |
+| `reasoning-multi` | Super | Primary + cross-domain guards (~900 tokens) |
+| `code-multi` | Super | Primary + cross-domain guards (~900 tokens) |
+| `memory-multi` | Super | Primary + cross-domain guards (~900 tokens) |
 
 ## Links
 

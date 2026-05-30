@@ -1,5 +1,5 @@
 """
-Ejentum Logic API -- OpenAI Agents SDK Tool
+Ejentum API -- OpenAI Agents SDK Tool
 
 Defines Ejentum as a function tool for OpenAI's Agents SDK (Responses API).
 The agent calls this tool when it needs reasoning augmentation.
@@ -9,13 +9,13 @@ import requests
 from agents import Agent, Runner, function_tool
 
 
-EJENTUM_URL = "https://ejentum-main-ab125c3.zuplo.app/logicv1/"
+EJENTUM_URL = "https://api.ejentum.com/harness/"
 EJENTUM_KEY = "YOUR_EJENTUM_API_KEY"
 
 
 @function_tool
 def ejentum_injection(query: str, mode: str = "reasoning") -> str:
-    """Retrieve a cognitive injection from Ejentum's Logic API.
+    """Retrieve a cognitive injection from Ejentum's Ejentum API.
 
     Call this before making complex judgments. Returns suppression signals
     that block cognitive shortcuts and a reasoning topology to follow.
